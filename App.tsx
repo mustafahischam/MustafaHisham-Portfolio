@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SOCIAL_LINKS, EXPERIENCES, SKILLS, PROJECTS } from './constants';
 import { Project, Experience } from './types';
 import { Github, Linkedin, Mail, ExternalLink, Lock, Menu, X, Code, Terminal, Database, ChevronRight, Download, Smartphone, ArrowUp, Users } from 'lucide-react';
@@ -65,7 +65,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 py-4 ${isScrolled ? 'bg-dark/95 backdrop-blur-xl border-b border-white/5 shadow-lg' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-dark/95 backdrop-blur-xl shadow-lg' : 'bg-transparent py-4'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
@@ -143,29 +143,59 @@ const Navbar = () => {
 
 const TextRotator = ({ words }: { words: string[] }) => {
   const [index, setIndex] = useState(0);
+  const [minWidth, setMinWidth] = useState<number | null>(null);
+  const measureRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!measureRef.current) return;
+    const spans = Array.from(measureRef.current.children) as HTMLElement[];
+    let max = 0;
+    spans.forEach((s) => {
+      max = Math.max(max, s.offsetWidth);
+    });
+    setMinWidth(max + 12); // add small padding
+  }, [words]);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
-    }, 5000); 
+    }, 5000);
     return () => clearInterval(interval);
   }, [words.length]);
 
   return (
-    <div className="inline-block relative h-[1.3em] overflow-hidden align-top min-w-[300px] md:min-w-[700px] text-left">
-      <AnimatePresence mode="popLayout">
-        <motion.span
-          key={words[index]}
-          initial={{ y: "100%", opacity: 0, filter: "blur(10px)" }}
-          animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-          exit={{ y: "-100%", opacity: 0, filter: "blur(10px)" }}
-          transition={{ duration: 1.5, ease: [0.2, 0.8, 0.2, 1] }} 
-          className="absolute top-0 left-0 text-primary font-bold whitespace-nowrap"
-        >
-          {words[index]}
-        </motion.span>
-      </AnimatePresence>
-    </div>
+    <>
+      {/* hidden measurement container */}
+      <div
+        ref={measureRef}
+        style={{ position: 'absolute', left: -9999, top: 0, visibility: 'hidden', whiteSpace: 'nowrap' }}
+        aria-hidden
+      >
+        {words.map((w) => (
+          <span key={w} className="text-primary font-bold whitespace-nowrap">
+            {w}
+          </span>
+        ))}
+      </div>
+
+      <div
+        className="inline-block relative h-[1.3em] overflow-x-visible overflow-y-hidden align-top min-w-[300px] md:min-w-[700px] text-left pr-4"
+        style={minWidth ? { minWidth: `${minWidth}px` } : undefined}
+      >
+        <AnimatePresence mode="popLayout">
+          <motion.span
+            key={words[index]}
+            initial={{ y: '100%', opacity: 0, filter: 'blur(10px)' }}
+            animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+            exit={{ y: '-100%', opacity: 0, filter: 'blur(10px)' }}
+            transition={{ duration: 1.5, ease: [0.2, 0.8, 0.2, 1] }}
+            className="absolute top-0 left-0 text-primary font-bold whitespace-nowrap"
+          >
+            {words[index]}
+          </motion.span>
+        </AnimatePresence>
+      </div>
+    </>
   );
 };
 
@@ -287,7 +317,7 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       whileHover={{ y: -5 }}
-      className="bg-card rounded-xl overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-300 group shadow-lg hover:shadow-primary/10 flex flex-col h-full"
+      className="relative bg-card rounded-xl overflow-hidden border border-white/5 hover:border-primary/50 transition-all duration-300 group shadow-lg hover:shadow-primary/10 flex flex-col h-full"
     >
       <div className="relative h-48 overflow-hidden">
         <img 
@@ -296,13 +326,16 @@ const ProjectCard: React.FC<{ project: Project }> = ({ project }) => {
           className="w-full h-full object-cover block"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent"></div>
+        {/* mask inside image container removed (will add sibling mask to overlap content) */}
         <div className="absolute top-4 right-4 flex gap-2">
            <span className="bg-black/60 backdrop-blur-md text-white/90 text-xs font-bold px-3 py-1 rounded-full border border-white/10 uppercase tracking-wide">
               {project.category}
             </span>
         </div>
       </div>
-      
+      {/* sibling mask placed at image/content boundary to hide seam during transforms */}
+      <div className="absolute left-0 right-0 top-[12rem] h-6 pointer-events-none bg-gradient-to-t from-card to-transparent" />
+
       <div className="p-6 flex flex-col flex-grow relative z-10 bg-card">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-xl font-bold text-white group-hover:text-primary transition-colors">{project.title}</h3>
