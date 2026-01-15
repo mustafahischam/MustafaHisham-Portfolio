@@ -181,15 +181,6 @@ const Hero = () => {
       <motion.div style={{ y: y1 }} className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-[128px]" />
       <motion.div style={{ y: y2 }} className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-[128px]" />
 
-      {/* Hero Image */}
-      <div className="absolute inset-0 z-15 pointer-events-none">
-        <img
-          src="/assets/hero silk.png"
-          alt="Hero background"
-          className="w-full h-full object-cover opacity-30"
-        />
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

@@ -109,18 +109,18 @@ export const PROJECTS: Project[] = [
     title: 'Nusuk Wear',
     description: 'A premium, modest wear e-commerce platform featuring elegant prayer wear. Built with a focus on visual storytelling, seamless checkout flows, and high-performance asset delivery.',
     techStack: ['Next.js 14', 'Shopify API', 'Tailwind', 'Framer Motion'],
-    imageUrl: 'https://images.unsplash.com/photo-1520013329424-9b369ec2a149?q=80&w=800&auto=format&fit=crop', // Brown/Beige Silk Texture
-    liveUrl: 'https://nusukwear.com/', 
-    githubUrl: 'https://github.com/vercel/commerce', 
+    imageUrl: '/assets/hero silk.png',
+    liveUrl: 'https://nusukwear.com/',
+    githubUrl: 'https://github.com/vercel/commerce',
     category: 'Full Stack',
-    isPrivate: false 
+    isPrivate: false
   },
   {
     id: 'egycash-erp',
     title: 'Enterprise Logistics ERP',
     description: 'A mission-critical ERP system for the Central Bank of Egypt. Handles secure logistics for cash and gold transport with real-time tracking, complex reporting, and banking-grade security.',
     techStack: ['React', 'Node.js', 'MongoDB', 'Chart.js', 'Express'],
-    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800', 
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop',
     isPrivate: true,
     category: 'Full Stack'
   },
@@ -129,8 +129,8 @@ export const PROJECTS: Project[] = [
     title: 'Nexus AI SaaS',
     description: 'A commercial-grade SaaS platform leveraging OpenAI. Features include a credit-based subscription model, rate-limiting middleware, and a responsive marketing content generator.',
     techStack: ['Next.js', 'OpenAI', 'PostgreSQL', 'Stripe', 'ShadcnUI'],
-    imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
-    githubUrl: 'https://github.com/shadcn-ui/taxonomy', 
+    imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop',
+    githubUrl: 'https://github.com/shadcn-ui/taxonomy',
     category: 'AI',
     isPrivate: false
   },
@@ -139,7 +139,7 @@ export const PROJECTS: Project[] = [
     title: 'Renaissance Cinemas',
     description: 'Core developer for the foundational ticketing engine (Team Project). This system was renovated and evolved to power the current Renaissance Cinemas digital platform, serving thousands of daily users.',
     techStack: ['PHP', 'MySQL', 'JavaScript', 'Legacy Integration'],
-    imageUrl: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&q=80&w=800',
+    imageUrl: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=800&auto=format&fit=crop',
     liveUrl: 'https://rnscinemas.com/en',
     category: 'Legacy',
     isPrivate: true
@@ -149,8 +149,8 @@ export const PROJECTS: Project[] = [
     title: 'Web3 Liquidity Tracker',
     description: 'Real-time blockchain analysis tool. Monitors liquidity pools and large transactions (Whale Alerts) across EVM chains, delivering instant signals via Discord webhooks.',
     techStack: ['Node.js', 'Web3.js', 'Ethers.js', 'AWS Lambda'],
-    imageUrl: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=800',
-    githubUrl: 'https://github.com/aave/interface', 
+    imageUrl: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=800&auto=format&fit=crop',
+    githubUrl: 'https://github.com/aave/interface',
     category: 'Blockchain',
     isPrivate: true
   },
