@@ -187,7 +187,16 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 tracking-tight leading-tight pt-10">
+          <div className="mb-6">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-primary mb-4">
+              Mostafa Hesham
+            </h2>
+            <h3 className="text-xl md:text-2xl lg:text-3xl font-medium text-gray-300 mb-8">
+              Full Stack Developer
+            </h3>
+          </div>
+
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight leading-tight">
             Architecting <br className="lg:hidden" />
             <TextRotator words={["Scalable ERP Systems", "Modern E-Commerce", "Enterprise Solutions", "Secure Blockchain"]} />
           </h1>
